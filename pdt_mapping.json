@@ -1,0 +1,187 @@
+{
+          
+  "properties":{ 
+          "id":  { "type": "long"  },
+          "author_id":{"type": "long"},
+          "content":  { "type": "text"},
+          "possibly_sensitive":  { "type": "boolean"  },
+          "language":  { "type": "text"},
+          "source":  { "type": "text"},
+          "retweet_count":  { "type": "integer"  },
+          "reply_count":  { "type": "integer"  },
+          "like_count":  { "type": "integer"  },
+          "quote_count":  { "type": "integer"  },
+          "created_at":  { "type": "date", "format": "yyyy-MM-dd HH:mm:ssZZZZZ"  },
+          "author": {
+            "type": "nested",
+            "properties":
+            {"id": {"type": "long"},
+            "name":  { "type": "text",
+            "fields":{
+              "ngram":{
+                "type": "text",
+                "analyzer": "custom_ngram"
+              },
+              "shingles":{
+                "type": "text",
+                "analyzer": "custom_shingles"
+              }
+            }},
+            "username":  { "type": "text", 
+            "fields":{
+              "ngram":{
+                "type": "text",
+                "analyzer": "custom_ngram"
+              }
+            }},
+            "description":  { "type": "text",
+            "analyzer": "englando",
+            "fields":{
+              "shingles":{
+                "type": "text",
+                "analyzer": "custom_shingles"
+              }
+            }},
+            "followers_count":  { "type": "integer"  },
+            "following_count":  { "type": "integer"  },
+            "tweet_count":  { "type": "integer"  },
+            "listed_count":  { "type": "integer"  }
+          }
+
+          },
+        
+          "conversation_references":{
+            "type": "nested",
+            "properties":{
+              "id": {"type": "long"},
+            "conversaton_id": {"type": "long"},
+            "parent_id": {"type": "long"},
+            "type":  { "type": "text"},
+            "parent": {
+              "type": "nested",
+              "properties":{
+              "id": { "type": "long"},
+              "content": { "type": "text"},
+              "hashtags":{
+                "type": "nested",
+                  "properties": {
+                        "id": {"type": "long"},
+                        "tag":  { "type": "text",
+                        "analyzer": "tolowercase"
+                        }
+                  
+        
+                  }
+              },
+              "author": {
+                "type": "nested",
+                "properties":{
+                  "id": {"type": "long"},
+                  "name": {"type": "text",
+                  "fields":{
+                    "ngram":{
+                      "type": "text",
+                      "analyzer": "custom_ngram"
+                    },
+                    "shingles":{
+                      "type": "text",
+                      "analyzer": "custom_shingles"
+                    }
+                  }},
+                  "description": {"type": "text",
+                  "analyzer": "englando",
+                  "fields":{
+                    "shingles":{
+                      "type": "text",
+                      "analyzer": "custom_shingles"
+                    }
+                  }}
+                }
+              }}}}},
+                
+                
+
+              "links":{
+                "type": "nested",
+                  "properties": {
+                    "id": {"type": "long"},
+                    "conversation_id": {"type": "long"},
+                    "url":  { "type": "text"
+        },
+                    "title":  { "type": "text"
+        },
+                    "description":  { "type": "text"
+        }
+        
+                  }
+              },
+              "annotations":{
+                "type": "nested",
+                  "properties": {
+                    "id": {"type": "long"},
+                    "conversation_id": {"type": "long"},
+                    "value":  { "type": "text"
+        },
+                    "type":  { "type": "text"
+        },
+                    "probability": {"type": "half_float"}
+        
+                  }
+              },
+              "context_domains":{
+                "type": "nested",
+                  "properties": {
+
+
+                      "id": {"type": "long"},
+                      "name":  { "type": "text"
+                      },
+                      "description":  { "type": "text"
+                      }
+
+                      
+            
+        
+                  }
+              },
+              "context_entities":{
+                  "type": "nested",
+                    "properties": {
+
+
+                      "id": {"type": "long"},
+                      "name":  { "type": "text"
+                      },
+                      "description":  { "type": "text"
+                      }
+          
+                    }
+                },
+
+              "hashtags":{
+                  "type": "nested",
+                    "properties": {
+                          "id": {"type": "long"},
+                          "tag":  { "type": "text",
+                          "analyzer": "tolowercase"
+                          }
+                    
+          
+                    }
+                }
+    
+                
+                  
+                
+            
+        
+        
+        
+        }
+      }
+
+
+        
+
+
+       
